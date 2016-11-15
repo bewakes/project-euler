@@ -1,0 +1,7 @@
+*.swo
+*.swp
+*.o
+*.txt
+__pycache__/
+*.s
+*.hi
