@@ -8,7 +8,7 @@ def countInc(num_length, first_digit):
         print(num_length, first_digit, cnt, l)
         s+=cnt
         lst.extend([x*10+y for y in l])
-    print(lst)
+        print(lst)
     return s, sorted(lst)
 
 def countDec(num_length, first_digit):
@@ -22,11 +22,9 @@ def countDec(num_length, first_digit):
         lst.extend([x*10+y for y in l])
     return s, sorted(lst)
 
-cnt, l = countInc(3,1)
+# cnt, l = countInc(3,1)
 # print(l)
-assert False
-
-digits = 6
+# assert False
 
 def get_non_bouncy(digits):
     total = 0

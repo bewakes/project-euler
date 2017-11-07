@@ -1,18 +1,37 @@
-def repunits(base, n):
-    p= 2
-    l = []
+from collections import Counter
+
+c = Counter()
+
+less_than = 10**12
+
+base = 2
+# while False and base<less_than:
+    # pow = 0
+    # sm = 0
+    # while True:
+        # sm += base**pow
+        # pow+=1
+        # if sm >less_than: break
+        # # print(sm)
+        # c[sm]+=1
+        # #s.add(sm)
+    # #l.append(s)
+    # base+=1
+#     #bases.append(base)
+
+while True:
+    pow = 1
+    if base > less_than: break
     while True:
-        nm = base**p -1
-        nm = nm/(base-1)
-        if nm>n:break
-        if nm< n and nm not in l:
-            l.append(nm)
-        p+=1
-    return l 
+        v = (base**pow -1)/(base-1)
+        # print(base, v)
+        if v == round(v, 0) and v<less_than:
+            c[int(v)] +=1
+        if v >=less_than:break
+        pow+=1
+    base+=1
 
-n = 50
-ls=[]
-for x in range(2, 50):
-    ls.append(repunits(x, 50))
-for x in ls:print x
 
+repunits = [k for k, v in c.items() if v>=2]
+print(sum(repunits))
+print(sorted(repunits))
