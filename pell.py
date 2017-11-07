@@ -54,16 +54,33 @@ def expand_frac_till_den(frac_gen, den_limit):
         q = a*q + qq
         pp = tp
         qq = tq
+    return p, q
+
+def expand_frac_till_cond(frac_gen, cond):
+    """cond is function that takes p, q"""
+    a0 = next(frac_gen)
+    a1 = next(frac_gen)
+    pp = a0
+    p = a1*a0+1
+    qq = 1
+    q = a1
+    while cond(p,q):
+        print('...', p, q)
+        tp = p
+        tq = q
+        a = next(frac_gen)
+        p = a*p + pp
+        q = a*q + qq
+        pp = tp
+        qq = tq
 
     return p, q
 
 if __name__== '__main__':
 
-    n = 2
+    n = 3
     cf = continued_fraction_sqrt(n)
-    # for i, x in enumerate(cf):
-        # print(x)
-    #     if i>10:break
-    p, q = expand_frac_till_den(cf, 10**12)
-    print(p, q)
-    print(p/q, n**.5)
+    for i, x in enumerate(cf):
+        print(x)
+        if i>10:break
+
