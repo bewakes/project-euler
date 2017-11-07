@@ -21,7 +21,12 @@ while True:
     qq = tq
 
     c1 = (2*p-1)/3
+    a1 = (c1-1)/2
     c2 = (2*p+1)/3
-    print(c1, c2)
+    a2 = (c2+1)/2
+    if 2*a1 == c1-1:
+        print('-', c1, c1, 2*a1)
+    if 2*a2 == c2+1:
+        print('+', c2, c2, 2*a2)
     if c1 > 10**9:
         break
