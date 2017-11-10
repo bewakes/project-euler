@@ -1,20 +1,20 @@
 import math
 
 def primeGen(n):
-	l = [2]
-	if(n<3):
-		return l
-	for x in range(3, n):
-		y=0
-		prime = True
-		while(l[y]<=math.sqrt(x)):
-			if x%l[y]==0:
-				prime=False
-				break
-			y+=1
-		if prime==True: 
-			l.append(x)
-	return l
+        l = [2]
+        if(n<3):
+                return l
+        for x in range(3, n):
+                y=0
+                prime = True
+                while(l[y]<=math.sqrt(x)):
+                        if x%l[y]==0:
+                                prime=False
+                                break
+                        y+=1
+                if prime==True: 
+                        l.append(x)
+        return l
 
 
 def sieve(n):
