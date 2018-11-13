@@ -1,11 +1,11 @@
 import math
 
-def wrong_method():
+def find():
     lst = []
 
     n = 4
     c = 0
-    while c < 80:
+    while c < 40: # 40 is arbitrary choice
         pow = 2
         while pow* math.log(n,10)+1 <= n+1:
             p = n**pow
@@ -13,7 +13,6 @@ def wrong_method():
             if sm == n:
                 c+=1
                 lst.append(p)
-                break
             pow+=1
         n+=1
 
@@ -23,6 +22,5 @@ def wrong_method():
 
     print(lst[29])
 
+find()
 
-def find():
-    lst = []
