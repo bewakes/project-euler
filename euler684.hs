@@ -1,5 +1,5 @@
+modulo :: Integer
 modulo = 1000000007
-
 
 fst3Tuple :: (a, a, a) -> a
 fst3Tuple (x, _, _) = x
@@ -13,18 +13,12 @@ numberPowerMod number pow modulus
                                                               else ((result * prevPow) `rem` modulus, c `div` 2, currPow)
                                                   where currPow = prevPow * prevPow `rem` modulus
 
-invDigitSumMod :: Integer -> Integer -> Integer
-invDigitSumMod n md = rm * tenPowerMod q md + (tenPowerMod q md  - 1)
-    where rm = n `rem` 9
-          q  = n `div` 9
-
-tenPowerMod, ninePowerMod :: Integer -> Integer -> Integer
+tenPowerMod :: Integer -> Integer -> Integer
 tenPowerMod = numberPowerMod 10
-ninePowerMod = numberPowerMod 9
 
+fibs :: [Integer]
 fibs = 0: 1: zipWith (+) fibs (tail fibs)
 
-toAdd = modulo * (fibs !! 90 `div` modulo)
 -- Very concise function to calculate inverse digit sum.
 -- The idea is that, for a given number n, the number whose digit sums equal n will be
 -- rem * (10 ^ q) + (10 ^ q - 1) where rem = n % 9 and q = n // 9(integer division)
@@ -38,20 +32,13 @@ toAdd = modulo * (fibs !! 90 `div` modulo)
 -- So, given the number n, and letting k = n // 9 and r = n % 9 the sum now becomes
 -- [(0 + 1 + 2 + 3 + ... + 8) * 10^ i + 9 * 10 ^ i - 9] + [(0 + 1 + 2 + ... + r) * 10 ^ k + (r+1) * 10 ^ k, where i ranges from 0 to k - 1
 --  = [sum(36*10^i + 8*10^i) where i ranges from 0 to k-1 ] + r(r+1)*10^k / 2 + (r+1) * 10^k
---  = 4 * (10^k-1) + r(r+1)*10^k /2  - n
+--  = 5 * (10^k-1) + (r+2)(r+1)*10^k /2  - n - 1
 moduloSumInverseDigitsUpto :: Integer -> Integer -> Integer
-moduloSumInverseDigitsUpto n md = 5 * (tenPowK - 1) + (r+2) * (r+1) * tenPowK `div` 2 - n - 1 + toAdd
+moduloSumInverseDigitsUpto n md = 5 * (tenPowK - 1) + (r+2) * (r+1) * tenPowK `div` 2 - n - 1
     where k = n `div` 9
           r = n `rem` 9
           tenPowK = tenPowerMod k md
 
-naiveSumModuloUpto n modulo = sum [invDigitSumMod n' modulo | n' <- [1..n]] `rem` modulo
-
-upto = 18
 
 main :: IO ()
-main = do
-    print $ (tail. tail) $take 10 fibs
-    print $ moduloSumInverseDigitsUpto 20 modulo `rem` modulo
-    print $ [(moduloSumInverseDigitsUpto num modulo `rem` modulo, naiveSumModuloUpto num modulo) | num <- [1..upto]]
-    print $ sum [moduloSumInverseDigitsUpto f modulo | f <- (tail . tail) (take 90 fibs)] `rem` modulo
+main = print $ (sum [moduloSumInverseDigitsUpto x modulo | x <- drop 2 (take 91 fibs)] `rem` modulo + modulo) `rem` modulo
